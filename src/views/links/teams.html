@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <style>
+        .container-form-log-in{
+            width: 25%;
+            text-align: left;
+        }
+
+        .icon-profile{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+    <div class="container-form-log-in p-3">
+        <form action="" method="post">
+            <label for="">Create a new team</label>
+            <hr>
+            <div class="field">
+                <label class="label">Project Name</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="text" placeholder="Name" value="">
+                    <span class="icon is-small is-left">
+                        <i class="fi fi-sr-pencil"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                <textarea class="textarea" placeholder="Description..."></textarea>
+                </div>
+            </div>
+
+            <div class="columns">
+                <div class="column is-four-fifths">
+                    <div class="field">
+                        <label class="label">Search a user</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input" type="text" placeholder="Write a email..." value="">
+                            <span class="icon is-small is-left">
+                                <i class="fi fi-sr-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <label class="label">.</label>
+                    <button class="button is-link" style="width: 100%; height: 50%;" type="button">🔎</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>username</th>
+                    <th>email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="https://d2a5isokysfowx.cloudfront.net/wp-content/uploads/2022/03/que-se-necesita-estudiar-para-ser-programador-scaled-1200x900.jpg" alt="" class="icon-profile"></td>
+                    <th>Eddy68</th>
+                    <th>eduardoa4848@Outlook.es</th>
+                  </tr>
+                  <tr>
+                    <td><img src="https://botechnews.com/wp-content/uploads/2022/09/descubre-si-tienes-corazon-de-programador.jpg" alt="" class="icon-profile"></td>
+                    <th>Alejando</th>
+                    <th>alex4848@Outlook.es</th>
+                  </tr>
+            </tbody>
+        </table>
+            <div class="control">
+                <button class="button is-primary" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</center>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/Styles.css">
+
+
+
+<link rel="stylesheet" href="css/main.css">
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.3.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+            DUCK GO
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Acerca de</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<button class="back">
+    <i class="mdi fi-ss-undo"></i>
+</button>
+
+
+<div class="stage">
+    <hr>
+    <div class="folder-wrap level-current scrolling">
+
+        <div class="tile folder" onclick="">
+            <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/folder-blue-512.png" alt="" class="mdi"
+                style="width: 25%;">
+            <h3>Fud SAAS</h3>
+        </div>
+
+        <div class="tile folder">
+            <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/folder-blue-512.png" alt="" class="mdi"
+                style="width: 25%;">
+            <h3>DuckDoy</h3>
+        </div>
+
+        <div class="tile folder">
+            <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/folder-blue-512.png" alt="" class="mdi"
+                style="width: 25%;">
+            <h3>FuckYou</h3>
+        </div>
+
+        <div class="tile folder">
+            <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/folder-blue-512.png" alt="" class="mdi"
+                style="width: 25%;">
+            <h3>Folder name</h3>
+        </div>
+
+        <div class="tile folder" onclick="nextWeb()">
+            <img src="https://cdn-icons-png.flaticon.com/512/189/189755.png" alt="" class="mdi" style="width: 25%;">
+            <h3>Add new project</h3>
+        </div>
+    </div>
+
+    <a href="login.html">Login</a>
+    <script src="js/main.js"></script>
+    <script>
+        async function load_path_folder() {
+            try {
+                const folderHandle = await window.showDirectoryPicker();
+                alert(folderHandle.name)
+            } catch (error) {
+                console.error('Error al seleccionar la carpeta:', error);
+            }
+        }
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -1,0 +1,51 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link rel="stylesheet" href="../../public/css/styless.css">
+    <style>
+        .notification{
+            width: 25%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            top: 5%;
+        }
+
+        .container-form-log-in{
+            width: 25%;
+            text-align: left;
+        }
+    </style>
+</head>
+
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="notification {% if category == 'success' %}is-success{% elif category == 'error' %}is-danger{% endif %}">
+        <button class="delete"></button>
+        <p>{{ message }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+          const $notification = $delete.parentNode;
+          
+          $delete.addEventListener('click', () => {
+              $notification.parentNode.removeChild($notification);
+          });
+      });
+  });
+</script>
