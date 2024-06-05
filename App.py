@@ -29,7 +29,11 @@ def home():
 
 @app.route('/login')
 def login():
-    return 'Hello word'
+    return render_template('links/web/login.html')
+
+@app.route('/tree')
+def tree():
+    return render_template('links/git/tree.html')
 
 @app.route('/add_user',methods=['POST'])
 def add_user():

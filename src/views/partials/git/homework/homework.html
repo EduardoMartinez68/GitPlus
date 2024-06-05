@@ -1,0 +1,139 @@
+<style>
+    .task {
+        cursor: pointer;
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255,.1);
+        border-radius: 4px;
+        background-color: #2C303A;
+    }
+    .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255,.1);
+            margin-bottom: 10px;
+    }
+    .task button {
+            margin-left: 10px;
+    }
+
+    .table-container {
+        min-height: 300px;
+        padding: 10px;
+        background-color: rgba(255,255,255,.01);
+        border-radius: 4px;
+    }
+    .table-container.drag-over {
+        background-color: rgba(255,255,255,.02);
+        border-color: #c3c3c3;
+    }
+</style>
+
+
+    <div class="columns">
+        <div class="column">
+            <h2 class="subtitle">To Do</h2>
+            <div id="todo" class="table-container" ondragover="allowDrop(event)" ondrop="drop(event)">
+                <div class="task" draggable="true" ondragstart="drag(event)" id="task1">
+                    Task 1
+                    <div>
+                        <button class="button is-light"><i class="fi fi-sr-pencil"></i></button>
+                        <button class="button is-danger"><i class="fi fi-sr-trash"></i></button>
+                    </div>
+                </div>
+                <div class="task" draggable="true" ondragstart="drag(event)" id="task2">
+                    Task 2 
+                    <div>
+                        <button class="button is-light"><i class="fi fi-sr-pencil"></i></button>
+                        <button class="button is-danger"><i class="fi fi-sr-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="button is-primary" onclick="create_a_new_home_work('Add new task')">Add Task</button>
+        </div>
+        <div class="column">
+            <h2 class="subtitle">In Progress</h2>
+            <div id="in-progress" class="table-container" ondragover="allowDrop(event)" ondrop="drop(event)">
+            </div>
+        </div>
+        <div class="column">
+            <h2 class="subtitle">Done</h2>
+            <div id="done" class="table-container" ondragover="allowDrop(event)" ondrop="drop(event)">
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    function allowDrop(event) {
+        event.preventDefault();
+        event.target.classList.add('drag-over');
+    }
+
+    function drag(event) {
+        event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function drop(event) {
+        event.preventDefault();
+        const data = event.dataTransfer.getData("text");
+        const task = document.getElementById(data);
+        event.target.appendChild(task);
+        event.target.classList.remove('drag-over');
+    }
+
+    document.querySelectorAll('.table-container').forEach(container => {
+        container.addEventListener('dragleave', () => {
+            container.classList.remove('drag-over');
+        });
+    });
+</script>
+
+
+<script>
+// Function to show HTML content in SweetAlert modal
+function create_a_new_home_work(title) {
+    // HTML content stored in a variable
+    const htmlContent = `
+        <div class="container">
+            <form id="new-task-form" action='' method='post'>
+                <div class="field">
+                    <label class="label left" >Task Name</label>
+                    <div class="control">
+                        <input class="input" type="text" id="task-name" placeholder="Enter task name">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Description</label>
+                    <div class="control">
+                        <textarea class="textarea" id="task-description" placeholder="Enter task description"></textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Due Date</label>
+                    <div class="control">
+                        <input class="input" type="date" id="task-due-date">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button type="submit" class="button is-primary">Add Task</button>
+                        <button type="button" class="button button is-danger">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    `;
+
+    Swal.fire({
+        title: title,
+        html: htmlContent,
+        showConfirmButton: false
+    });
+}
+</script>

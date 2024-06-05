@@ -1,0 +1,87 @@
+<div id="diagram" class="diagram-git"></div>
+<!-- Include D3.js -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+    const branches = [
+        { name: 'Branch 1', commits: ['C1', 'C2', 'C3', 'C1', 'C2', 'C3', 'C1', 'C2', 'C3', 'C1', 'C2', 'C3', 'C1', 'C2', 'C3', 'C1', 'C2', 'C3', 'C1', 'C2', 'C3'] },
+        { name: 'Branch 2', commits: ['C2', 'C4', 'C5'] },
+        { name: 'Branch 3', commits: ['C3', 'C6'] }
+    ];
+
+    const svg = d3.select('#diagram')
+        .append('svg')
+        .attr('width', 800)
+        .attr('height', 400);
+
+    const margin = { top: 50, right: 50, bottom: 50, left: 150 };
+    const width = svg.attr('width') - margin.left - margin.right;
+    const height = svg.attr('height') - margin.top - margin.bottom;
+
+    const g = svg.append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    const yScale = d3.scalePoint()
+        .domain(branches.map(d => d.name))
+        .range([0, height])
+        .padding(1);
+
+    const xScale = d3.scaleLinear()
+        .domain([0, d3.max(branches, d => d.commits.length - 1)])
+        .range([0, width]);
+
+    const lineGenerator = d3.line()
+        .x((d, i) => xScale(i))
+        .y((d, i, nodes) => yScale(nodes[i].branchName))
+        .curve(d3.curveBasis);
+
+    branches.forEach(branch => {
+        branch.commits.forEach((commit, index) => {
+            g.append('circle')
+                .attr('cx', xScale(index))
+                .attr('cy', yScale(branch.name))
+                .attr('r', 10)
+                .attr('fill', (branch.name === 'Branch 1') ? '#4CAF50' :
+                    (branch.name === 'Branch 2') ? '#FF5722' : '#03A9F4')
+                .attr('stroke', '#000')
+                .attr('data-commit', commit)
+                .on('mouseover', function (event, d) {
+                    tooltip.transition()
+                        .duration(200)
+                        .style('opacity', .9);
+                    tooltip.html(`Commit: ${d3.select(this).attr('data-commit')}`)
+                        .style('left', (event.pageX) + 'px')
+                        .style('top', (event.pageY - 28) + 'px');
+                })
+                .on('mouseout', function () {
+                    tooltip.transition()
+                        .duration(500)
+                        .style('opacity', 0);
+                });
+        });
+
+        const lineData = branch.commits.map((commit, index) => ({ commit, branchName: branch.name }));
+
+        g.append('path')
+            .datum(lineData)
+            .attr('fill', 'none')
+            .attr('stroke', (branch.name === 'Branch 1') ? '#4CAF50' :
+                (branch.name === 'Branch 2') ? '#FF5722' : '#03A9F4')
+            .attr('stroke-width', 2)
+            .attr('d', lineGenerator);
+    });
+
+    g.selectAll('.branch-label')
+        .data(branches)
+        .enter()
+        .append('text')
+        .attr('x', -10)
+        .attr('y', d => yScale(d.name))
+        .attr('dy', '.35em')
+        .attr('text-anchor', 'end')
+        .text(d => d.name)
+        .attr('fill', 'var(--main-font-color)'); // Cambio de color aquí
+
+    const tooltip = d3.select('body').append('div')
+        .attr('class', 'tooltip')
+        .style('opacity', 0);
+</script>

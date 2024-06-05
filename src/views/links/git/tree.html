@@ -1,0 +1,200 @@
+{% include 'partials/head.html' %}
+{% include 'partials/navbar.html' %}
+<style>
+  /*global*/
+  :root {
+    --color-container: #1E1F26;
+    --main-font-family: 'Arial, sans-serif';
+    --commit-color-main: #4CAF50;
+    --commit-color-feature1: #FF5722;
+    --commit-color-feature2: #03A9F4;
+    --line-color: #000;
+    --tooltip-bg-color: lightsteelblue;
+    --main-font-color: white;
+  }
+
+  .swal2-popup {
+            background-color: var(--color-container) !important;
+            color: #fff !important;
+            align-items: left;
+  }
+  .swal2-content {
+            text-align: left !important;
+        }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+  }
+
+  /*history tree*/
+  .tree {
+    background-color: var(--color-container);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  .li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    border-left: 1px solid #ccc;
+    height: 100%;
+  }
+
+  .li:last-child::before {
+    height: 50%;
+  }
+
+  .li:only-child::before {
+    display: none;
+  }
+
+  .li::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    height: 50%;
+    width: 10px;
+  }
+
+  .li:last-child::after {
+    height: 0;
+  }
+
+  .li:only-child::after {
+    display: none;
+  }
+
+  .li:before,
+  .li:after {
+    box-sizing: border-box;
+  }
+
+
+  .btn-git {
+    background-color: transparent;
+    border-color: none;
+    color: #ccc;
+  }
+
+  .btn-git:hover {
+    background-color: transparent;
+    border-color: none;
+    color: white;
+  }
+
+  .btn-git-branch {
+    background-color: transparent;
+    border-color: none;
+    color: white;
+    ;
+  }
+
+  .tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    font: 12px sans-serif;
+    background: var(--color-container);
+    color: white;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+  /*setting tree*/
+  .icon-profile {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+
+  .label-git {
+    text-align: left;
+    text-align: left;
+  }
+
+  .diagram-git {
+    padding: 0;
+    background-color: #2C303A;
+    background-color: rgba(48, 48, 58, .5);
+  }
+
+  /*secction tap*/
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.is-active {
+    display: block;
+  }
+
+</style>
+
+<head>
+  <style>
+  </style>
+</head>
+
+
+<body>
+  <section class="section">
+    <h1 class="title"><i class="fi fi-sr-browser"></i> Team Name</h1>
+    <div class="tabs is-centered">
+        <ul>
+            <li class="is-active" data-tab="tab1"><a><i class="fi fi-sr-chart-tree"></i>   Tree Github</a></li>
+            <li data-tab="tab2"><a><i class="fi fi-sr-completed"></i>   Home Work</a></li>
+            <li data-tab="tab3"><a>Tab 3</a></li>
+        </ul>
+    </div>
+    <div id="tab1" class="tab-content is-active">
+      {% include 'partials/git/tree/sectionGit.html' %}
+    </div>
+    <div id="tab2" class="tab-content">
+      {% include 'partials/git/homework/homework.html' %}
+    </div>
+    <div id="tab3" class="tab-content">
+        <p>This is the content of Tab 3.</p>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.tabs li');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove is-active class from all tabs and contents
+                tabs.forEach(item => item.classList.remove('is-active'));
+                tabContents.forEach(content => content.classList.remove('is-active'));
+
+                // Add is-active class to the clicked tab and corresponding content
+                tab.classList.add('is-active');
+                const tabContent = document.getElementById(tab.dataset.tab);
+                tabContent.classList.add('is-active');
+            });
+        });
+    });
+</script>
+</body>
+
+</html>
