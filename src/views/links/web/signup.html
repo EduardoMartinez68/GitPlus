@@ -1,0 +1,209 @@
+{% include 'partials/head.html' %}
+{% include 'partials/navbar.html' %}
+
+<body>
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="columns is-8 is-variable ">
+          <div class="column is-two-thirds has-text-left">
+            <h1 class="title is-1">Contact Us</h1>
+            <p class="is-size-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla eligendi soluta
+              voluptate facere molestiae consequatur.</p>
+          </div>
+
+          <div class="container-form-log-in p-3">
+            <form action="/add_user" method="post">
+              <label for="">Log in</label>
+              <hr>
+              <div class="field">
+                <label class="label">Username</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input class="input" type="text" placeholder="User name" value="" name="username" required>
+                  <span class="icon is-small is-left">
+                    <i class="fi fi-sr-user"></i>
+                  </span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label">E-mail</label>
+                <div class="control has-icons-left has-icons-right">
+                  <input class="input" type="text" placeholder="E-mail" value="" name="email" required>
+                  <span class="icon is-small is-left">
+                    <i class="fi fi-sr-envelope"></i>
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="field is-grouped">
+                <div class="field">
+                  <label class="label">password</label>
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="password" placeholder="Password" value="" name="password1" required>
+                    <span class="icon is-small is-left">
+                      <i class="fi fi-sr-lock"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">confirm password</label>
+                  <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="password" placeholder="Password" value="" name="password2" required>
+                    <span class="icon is-small is-left">
+                      <i class="fi fi-sr-lock"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="field">
+                <div class="control">
+                  <label class="checkbox">
+                    <input type="checkbox" name="terms_and_conditions">
+                    I agree to the <a href="#">terms and conditions</a>
+                  </label>
+                </div>
+              </div>
+
+              <div class="control">
+                <button class="button is-primary">Sing Up</button>
+              </div>
+            </form>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Obtener referencias a los campos
+      const password1Input = document.querySelector('input[name="password1"]');
+      const password2Input = document.querySelector('input[name="password2"]');
+      const emailInput = document.querySelector('input[name="email"]');
+      const usernameInput = document.querySelector('input[name="username"]');
+
+      // Agregar un event listener para el evento de cambio a los campos de contraseña
+      password2Input.addEventListener('input', function () {
+        // Verificar si las contraseñas coinciden
+        if (password1Input.value === password2Input.value) {
+          // Si coinciden, cambiar el borde de los campos a verde
+          password1Input.style.borderColor = 'green';
+          password2Input.style.borderColor = 'green';
+        } else {
+          // Si no coinciden, cambiar el borde de los campos a rojo
+          password1Input.style.borderColor = 'red';
+          password2Input.style.borderColor = 'red';
+        }
+      });
+
+      // Agregar un event listener para el evento de cambio al campo de correo electrónico
+      emailInput.addEventListener('input', function () {
+        // Verificar si el valor del campo es un correo electrónico válido
+        const email = emailInput.value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailPattern.test(email)) {
+          // Si es un correo electrónico válido, cambiar el borde del campo a verde
+          emailInput.style.borderColor = 'green';
+        } else {
+          // Si no es un correo electrónico válido, cambiar el borde del campo a rojo
+          emailInput.style.borderColor = 'red';
+        }
+      });
+
+      // Agregar un event listener para el evento de cambio al campo de nombre de usuario
+      usernameInput.addEventListener('input', function () {
+        // Verificar si el valor del campo tiene al menos 6 caracteres
+        const username = usernameInput.value;
+        if (username.length >= 6) {
+          // Si tiene al menos 6 caracteres, cambiar el borde del campo a verde
+          usernameInput.style.borderColor = 'green';
+        } else {
+          // Si no tiene al menos 6 caracteres, cambiar el borde del campo a rojo
+          usernameInput.style.borderColor = 'red';
+        }
+      });
+    });
+  </script>
+</body>
+
+<!--
+<body>
+    <center>
+    <div class="container-form-log-in p-3">
+      <form action="/add_user" method="post">
+        <label for="">Log in</label>
+        <hr>
+        <div class="field">
+            <label class="label">Username</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text" placeholder="User name" value="" name="username">
+                <span class="icon is-small is-left">
+                    <i class="fi fi-sr-user"></i>
+                </span>
+                <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                </span>
+            </div>
+            <p class="help">This username is available</p>
+        </div>
+
+        <div class="field">
+            <label class="label">E-mail</label>
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text" placeholder="E-mail" value="" name="email">
+                <span class="icon is-small is-left">
+                    <i class="fi fi-sr-envelope"></i>
+                </span>
+                <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                </span>
+            </div>
+            <p class="help">This username is available</p>
+        </div>
+   
+
+        <div class="field is-grouped">
+            <div class="field">
+                <label class="label">password</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="password" placeholder="Password" value="" name="password1">
+                    <span class="icon is-small is-left">
+                        <i class="fi fi-sr-lock"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">confirm password</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input" type="password" placeholder="Password" value="" name="password2">
+                    <span class="icon is-small is-left">
+                        <i class="fi fi-sr-lock"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="field">
+            <div class="control">
+            <label class="checkbox">
+                <input type="checkbox" name="terms_and_conditions">
+                I agree to the <a href="#">terms and conditions</a>
+            </label>
+            </div>
+        </div>
+
+        <div class="control">
+            <button class="button is-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+</center>
+</body>
+--->

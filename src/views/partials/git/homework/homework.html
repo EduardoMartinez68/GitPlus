@@ -67,6 +67,7 @@
 
 
 <script>
+    /*
     function allowDrop(event) {
         event.preventDefault();
         event.target.classList.add('drag-over');
@@ -88,9 +89,52 @@
         container.addEventListener('dragleave', () => {
             container.classList.remove('drag-over');
         });
+    });*/
+</script>
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const socket = io();
+
+        socket.on('connect', () => {
+            console.log('Connected to server');
+        });
+
+        socket.on('task_moved', (data) => {
+            const task = document.getElementById(data.task_id);
+            const newColumn = document.getElementById(data.new_column);
+            newColumn.appendChild(task);
+        });
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            const data = event.dataTransfer.getData("text");
+            const task = document.getElementById(data);
+            const newColumn = event.target.closest('.table-container');
+            if (newColumn) {
+                newColumn.appendChild(task);
+                socket.emit('move_task', {task_id: data, new_column: newColumn.id});
+            }
+        }
+
+        document.querySelectorAll('.table-container').forEach(container => {
+            container.addEventListener('dragover', allowDrop);
+            container.addEventListener('drop', drop);
+        });
+
+        document.querySelectorAll('.task').forEach(task => {
+            task.addEventListener('dragstart', drag);
+        });
     });
 </script>
-
 
 <script>
 // Function to show HTML content in SweetAlert modal
